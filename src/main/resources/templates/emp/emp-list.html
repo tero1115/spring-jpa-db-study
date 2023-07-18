@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .card {
+            background-color: whitesmoke;
+            border: 1px solid black;
+            width: 200px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <h2>직원 리스트</h2>
+    <div>
+        <div class="card" th:onclick="|goDetail(${dto.employeeId})|" th:each="dto : ${empTableDTOList}">
+
+            <div>
+                <span>직원번호 : </span>
+                <span th:text="${dto.employeeId}"></span>
+            </div>
+            <div>
+                <span>직원이름 : </span>
+                <span th:text="${dto.firstName}"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        // 페이지 이동
+        const goDetail = (employeeId) => {
+            location.href = "/emp/" + employeeId;
+        }
+    </script>
+
+</body>
+</html>
