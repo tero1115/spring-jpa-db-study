@@ -9,5 +9,5 @@ DB를 연동해서 화면에 띄우기<br>
 상세페이지<br>
 ![image](https://github.com/tero1115/spring-jpa-db-study/assets/67888405/5f79c5ba-9256-46df-b2e5-d86d29483506)
 
-메인페이지에 추가버튼 기능추가
+메인페이지에 추가버튼 기능추가<br>
 ![image](https://github.com/tero1115/spring-jpa-db-study/assets/67888405/293b05f5-3a60-4cd2-b541-6af579052b17)
