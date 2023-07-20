@@ -20,14 +20,13 @@ public class EmpService {
     public List<EmpTableDTO> getEmpTableData(){
         return EmpTableDTO.fromEntityList(employeesRepository.findAll());
     }
-
+    
     public EmpDetailDTO getEmpDetailData(Integer employeeId){
         Optional<EmployeesEntity> employeesEntityOptional = employeesRepository.findById(employeeId);
 
         if (!employeesEntityOptional.isPresent()) {
             throw new RuntimeException("잘못된 요청입니다.");
         }
-
         return EmpDetailDTO.fromEntity(employeesEntityOptional.get());
     }
 }
