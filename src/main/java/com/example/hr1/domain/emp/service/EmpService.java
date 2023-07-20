@@ -17,6 +17,15 @@ public class EmpService {
     @Autowired
     private EmployeesRepository employeesRepository;
 
+    public List<EmpTableDTO> getSearchEmpTableData(String firstName){
+        // firstName이 null이면 findAll
+        // firstName이 null이 아니면 findByFirstName~
+        if (firstName == null) {
+            return EmpTableDTO.fromEntityList(employeesRepository.findAll());
+        } else {
+            return EmpTableDTO.fromEntityList(employeesRepository.findByFirstNameContainingIgnoreCase(firstName));
+        }
+    }
     public List<EmpTableDTO> getEmpTableData(){
         return EmpTableDTO.fromEntityList(employeesRepository.findAll());
     }
