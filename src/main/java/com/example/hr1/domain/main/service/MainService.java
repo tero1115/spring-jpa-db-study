@@ -22,6 +22,14 @@ public class MainService {
     @Autowired
     private RegionsRepository regionsRepository;
 
+    public void deleteMainData(Integer regionId) {
+        RegionsEntity regionsEntity = regionsRepository.findByRegionId(regionId);
+        if (regionsEntity == null) {
+            throw new RuntimeException("이미 삭제된 지역입니다.");
+        }
+        regionsRepository.delete(regionsEntity);
+    }
+
     public void postMainData(ReqInserMainDTO reqInserMainDTO) {
 
         long count = regionsRepository.count();
