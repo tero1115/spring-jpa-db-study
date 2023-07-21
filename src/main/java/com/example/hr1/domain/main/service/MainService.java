@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.hr1.domain.main.dto.ReqInserMainDTO;
+import com.example.hr1.domain.main.dto.ReqUpdateMainDTO;
 import com.example.hr1.domain.main.dto.ResMainDTO;
+import com.example.hr1.domain.main.dto.ResUpdateMainDTO;
 import com.example.hr1.model.regions.entity.RegionsEntity;
 import com.example.hr1.model.regions.repository.RegionsRepository;
+
+import jakarta.transaction.Transactional;
 
 // 약속
 // entity객체는 Service에서 빠져나가지 못한다
@@ -22,6 +26,26 @@ public class MainService {
     @Autowired
     private RegionsRepository regionsRepository;
 
+    // 매개변수 수정
+    @Transactional
+    public void updateMainData(Integer regionId, ReqUpdateMainDTO reqUpdateMainDTO) {
+
+        // regionID를 받아서 넣어주기
+        RegionsEntity regionsEntity = regionsRepository.findByRegionId(regionId);
+
+        if (regionsEntity == null) {
+            throw new RuntimeException("잘못된 요청입니다.");
+        }
+
+        // spring data jap는 더티체킹을 사용한다
+        // 데이터베이스에서 가져온 데이터(엔티티)가 변경이 되면
+        // 자동으로 update쿼리를 날린다
+
+        // dto에서 바뀐지역 이름 받아서 넣어주기
+        regionsEntity.setRegionName(reqUpdateMainDTO.getRegionName());
+    }
+
+    @Transactional
     public void deleteMainData(Integer regionId) {
         RegionsEntity regionsEntity = regionsRepository.findByRegionId(regionId);
         if (regionsEntity == null) {
@@ -30,6 +54,7 @@ public class MainService {
         regionsRepository.delete(regionsEntity);
     }
 
+    @Transactional
     public void postMainData(ReqInserMainDTO reqInserMainDTO) {
 
         long count = regionsRepository.count();
@@ -55,6 +80,8 @@ public class MainService {
 
     }
 
-
+    public ResUpdateMainDTO getUpdateMainPageData(Integer regionId) {
+        return ResUpdateMainDTO.fromEntity(regionsRepository.findByRegionId(regionId));
+    }
     
 }

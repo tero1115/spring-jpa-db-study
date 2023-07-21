@@ -1,6 +1,8 @@
 package com.example.hr1.model.regions.entity;
 // DB 테이블명 + Entity
 
+import org.checkerframework.checker.units.qual.t;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -30,6 +32,10 @@ public class RegionsEntity {
 
     @Column(name = "region_name")
     private String regionName;
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
 
     @Override
     public String toString() {

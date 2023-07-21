@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hr1.common.dto.ResponseDTO;
 import com.example.hr1.domain.main.dto.ReqInserMainDTO;
+import com.example.hr1.domain.main.dto.ReqUpdateMainDTO;
 import com.example.hr1.domain.main.dto.ResMainDTO;
 import com.example.hr1.domain.main.service.MainService;
 
@@ -46,5 +48,14 @@ public class MainControllerApiV1 {
             .message("region 삭제에 성공했습니다.")
             .build();
     }
+   
+    @PutMapping("/api/v1/update/{regionId}")
+    public ResponseDTO<Object> postRegionData(@PathVariable Integer regionId, @RequestBody ReqUpdateMainDTO reqUpdateMainDTO) {
+        mainService.updateMainData(regionId, reqUpdateMainDTO);
 
+        return ResponseDTO.builder()
+            .code(0)
+            .message("region 수정에 성공했습니다.")
+            .build();
+    }
 }
