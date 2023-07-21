@@ -57,10 +57,7 @@ public class MainService {
     @Transactional
     public void postMainData(ReqInserMainDTO reqInserMainDTO) {
 
-        long count = regionsRepository.count();
-
         RegionsEntity regionsEntity = RegionsEntity.builder()
-        .regionId((int)count + 1)
         .regionName(reqInserMainDTO.getRegionsName())
         .build();
 
